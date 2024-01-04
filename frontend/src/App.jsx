@@ -1,7 +1,10 @@
 import Header from "./components/Header"
 
 export default function App(){
-  <div>
+  return(
+
+    <div>
     <Header/>
   </div>
+    )
 }
