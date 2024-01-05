@@ -2,7 +2,7 @@ import {image} from "../constants/image"
 
 export default function Header(){
     return(
-        <header className="flex border border-black pt-8 pb-10 mb-0 w-full  justify-between px-12 bg-black text-white ">
+        <header className="flex pt-8 pb-10 mb-0 w-full  justify-between px-12  text-white ">
             <img src={image[0].image} alt={image[0].alt} className="border border-black w-auto h-20 pointer rounded-lg "/>
             <div>
                <input type="text" className="border border-black rounded-lg text-white " />
