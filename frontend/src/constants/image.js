@@ -1,8 +1,15 @@
-const logo =[
-    {src:'./assets/logo.png',
-    alt:'logo'},
+import logo from "../assets/logo.png"
+import background from "../assets/background.mp4"
 
-]
-
-export default logo
+export const image=[
+    {
+        image:logo,
+        alt:"logo-image",
+    },
+    {
+        image:background,
+        alt:"background-body"
+    }
+    
+];
 
