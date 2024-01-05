@@ -1,8 +1,10 @@
-import image from "../constants/image"
+import {image} from "../constants/image.js";
+
+
 export default function Body(){
     return(
-        <div img={image[1].image} alt={image[1].alt}>
-
+        <div className="">
+            home
         </div>
     )
 }
