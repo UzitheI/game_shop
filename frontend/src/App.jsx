@@ -1,10 +1,12 @@
 import Header from "./components/Header";
 import Body from "./components/Body";
-import background2 from "./assets/background2.mp4"; // Import the MP4 video file
+import background2 from "./assets/background2.mp4";
+ // Import the MP4 video file
+import Right from "./components/Right";
 
 export default function App() {
   return (
-    <div className="relative h-screen">
+    <div className="relative h-screen text-white">
       {/* Video Background */}
       <video
         autoPlay
@@ -20,7 +22,11 @@ export default function App() {
       {/* Content Overlay */}
       <div className="relative z-10">
         <Header />
+        <div className="flex justify-between p-40 border border-white px-14">
+
         <Body />
+        <Right/>
+        </div>
       </div>
     </div>
   );
