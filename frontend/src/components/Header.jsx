@@ -9,7 +9,7 @@ export default function Header(){
         setIsOpen(!isOpen);
     };
     return(
-        <header className="flex pt-8 pb-10 mb-0 w-full  justify-between px-12  text-white ">
+        <header className="flex pt-8 pb-4 mb-0 w-full  justify-between px-12  text-white bg-black bg-opacity-70">
             <img src={image[0].image} alt={image[0].alt} className="border border-black w-auto h-20 pointer rounded-lg "/>
             <div className="relative">
                <input type="text" className={`border border-black rounded-lg text-black p-2 w-80 transition-all ${isOpen?"w-96":""}`} 
