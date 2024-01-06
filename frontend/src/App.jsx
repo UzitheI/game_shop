@@ -6,7 +6,7 @@ import Right from "./components/Right";
 
 export default function App() {
   return (
-    <div className="relative h-screen text-white">
+    <div className="relative h-screen text-white font-cuteFont size-2xl font-bold ">
       {/* Video Background */}
       <video
         autoPlay
@@ -22,7 +22,7 @@ export default function App() {
       {/* Content Overlay */}
       <div className="relative z-10">
         <Header />
-        <div className="flex justify-between p-40 border border-white px-14">
+        <div className="flex justify-between p-40 px-14">
 
         <Body />
         <Right/>
