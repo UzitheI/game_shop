@@ -4,6 +4,7 @@ import background2 from "./assets/background2.mp4";
  // Import the MP4 video file
 import Right from "./components/Right";
 import Add from "./components/Add";
+import {Provider} from "react-redux";
 
 
 
