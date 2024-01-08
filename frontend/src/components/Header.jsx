@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {image} from "../constants/image"
+import {Link} from "react-router-dom";
 
 export default function Header(){
     const[inputText,setInputText]=useState('');
@@ -19,10 +20,10 @@ export default function Header(){
                onChange={(e)=>setInputText(e.target.value)}/>
                <button className="absolute right-4 top-5 transform -translate-y-1/2 px-4 bg-white text-black rounded-lg" onClick={toggleWidth}>Search</button>
             </div>
-            <div className="flex justify-between space-x-4 ">
-                <a href="">add</a>
+            <div className="flex justify-between space-x-4   ">
+                <Link to="/add" className="hover:bg-white hover:text-black rounded-lg mb-14">add</Link>
                 <div className="border border-white mb-10 "></div>
-                <a href="">cart</a>
+                <a href="" className="hover:bg-white hover:text-black rounded-lg mb-14">cart</a>
             </div>
         </header>
     )
