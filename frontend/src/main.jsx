@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Add from "../src/components/Add.jsx";
-import Last30days from "./components/Last30days.jsx";
+import PlayDice from "./components/PlayDice.jsx";
 
 const router=createBrowserRouter([
   {path:"/",
@@ -15,9 +15,13 @@ const router=createBrowserRouter([
     element:<Add/>
   },
   {
-    path:"last30days",
-    element:<Last30days/>
+    path:"PlayDice",
+    element:<PlayDice/>
   },
+  {
+    path:"header",
+    element:<App/>
+  }
 ])
 
 ReactDOM.createRoot(document.getElementById('root')).render(
