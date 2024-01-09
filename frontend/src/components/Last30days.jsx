@@ -1,44 +1,53 @@
-import {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import Header from "./Header";
+import axios from "axios";
 
-const useImageURL=()=>{
-    const apiKey="c14a43ddf59e42bba18d3744d8c470cb";
-    const [imageURL,setImageURL]=useState(null);
-    const [error, setError]=useState(null);
-    const [loading, setLoading]=useState(true);
-
-    useEffect(()=>{
-        fetch(`https://rawg.io/api/games?token&key=${apiKey}`).then((response)=>{
-            // console.log(response.status); working
-            if(response.status >=400){
-                throw new Error("server error");
-            }
-            return response.json();
-        }).then((response)=>{
-            const firstGame=data.results[0];
-            if(firstGame && firstGame.background_image){
-                setImageURL(firstGame.background_image);
-            }
-            else{
-                throw new Error("No game found in the response")
-            }
-        }
-        ).catch((error)=>setError(error)).finally(()=>setLoading(false));
-    },[]);
+export default function Last30days() {
+  const apiKey = "c14a43ddf59e42bba18d3744d8c470cb";
+  const [gameData, setGameData] = useState(null);
+  const [id, setId] = useState(null);
+  const releasedDate = new Date("2023-10-11");
+  const changeGameId =()=>{
+      const newId=Math.random(100,5000);
+    setId(newId);
 }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        changeGameId();
+        const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`);
+        //data aako xaina cuz no id
+        const game = response.data;
+        console.log(game);
 
-export default function Last30days(){
-    const{imageURL, error, loading} =useImageURL();
-    if(error){
-    
-        return<p>A network error was encounterd</p>
-    } 
-        
-    if(loading) {return <p>Loading...</p>}
-    return(
+        if (new Date(game.released) > releasedDate) {
+          setGameData(game);
+        }
+      } catch (error) {
+        console.error("There has been an error in the fetch. Please resolve.", error);
+        setGameData(null); // Handle error by setting gameData to null
+      }
+    };
+
+    if (id !==null) {
+      fetchData();
+    //   console.log(id);
+    }
+  }, [id, apiKey, releasedDate]);
+//   console.log(id);
+
+  return (
+    <div>
+      <Header />
+      {gameData ? (
         <div>
-            <h1>An image</h1>
-            <img src={imageURL} alt={"placeholder"} />
+          <h1>{gameData.name}</h1>
+          {/* Add other game details you want to display */}
         </div>
-    )
+      ) : (
+        <p>Loading...</p>
+      )}
+    </div>
+  );
 }
