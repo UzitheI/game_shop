@@ -10,9 +10,12 @@ export default function Header(){
         setIsOpen(!isOpen);
     };
     return(
-        <Link to="/" className="flex pt-8 pb-4 mb-0 w-full  justify-between px-12  text-white bg-black bg-opacity-70">
+      
 
-            <img src={image[0].image} alt={image[0].alt} className="border border-black w-auto h-20 pointer rounded-lg "/>
+        <div  className="flex pt-8 pb-4 mb-0 w-full  justify-between px-12  text-white bg-black bg-opacity-70">
+            <Link to="/">
+            <img to="/" src={image[0].image} alt={image[0].alt} className="border border-black w-auto h-20 pointer rounded-lg "/>
+            </Link>
             <div className="relative">
                <input type="text" className={`border border-black rounded-lg text-black p-2 w-80 transition-all ${isOpen?"w-96":""}`} 
                placeholder="Search your game.."
@@ -26,6 +29,6 @@ export default function Header(){
                 <div className="border border-white mb-10 "></div>
                 <a href="" className="hover:bg-white hover:text-black rounded-lg mb-14">cart</a>
             </div>
-        </Link>
+        </div>
     )
 }
