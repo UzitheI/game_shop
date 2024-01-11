@@ -1,14 +1,18 @@
 import { useState } from "react"
 import {image} from "../constants/image"
 import {Link} from "react-router-dom";
+import GlobalAPI from "../Services/GlobalAPI";
 
 export default function Header(){
     const[inputText,setInputText]=useState('');
     const[isOpen, setIsOpen]=useState(false);
+    const[options,setOptions]=useState([]);
 
     const toggleWidth=(width)=>{
         setIsOpen(!isOpen);
     };
+
+    
     return(
       
 
@@ -21,7 +25,8 @@ export default function Header(){
                placeholder="Search your game.."
                value={inputText}
                onClick={toggleWidth}
-               onChange={(e)=>setInputText(e.target.value)}/>
+               onChange={(e)=>setInputText(e.target.value)} />
+               <option value="text">{}</option>
                <button className="absolute right-4 top-5 transform -translate-y-1/2 px-4 bg-white text-black rounded-lg" onClick={toggleWidth}>Search</button>
             </div>
             <div className="flex justify-between space-x-4   ">
