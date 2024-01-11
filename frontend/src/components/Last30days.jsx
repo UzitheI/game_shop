@@ -1,53 +1,54 @@
 import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import axios from "axios";
+import GlobalAPI from "../Services/GlobalAPI";
+import Banner from "./Banner";
+import GenreList from "./GenreList";
+import TrendingGames from "./TrendingGames";
+import GamesByGenresId from "./GamesByGenresId";
+
 
 export default function Last30days() {
   const apiKey = "c14a43ddf59e42bba18d3744d8c470cb";
-  const [gameData, setGameData] = useState(null);
-  const [id, setId] = useState(null);
-  const releasedDate = new Date("2023-10-11");
-  const changeGameId =()=>{
-      const newId=Math.random(100,5000);
-    setId(newId);
-}
+  const [allGameList, setallGameList] = useState(null);
+  const [id, setId] = useState(400);
+  const [gameListByGenres,setGameListByGenres]=useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        changeGameId();
-        const response = await axios.get(`https://api.rawg.io/api/games/${id}?key=${apiKey}`);
-        //data aako xaina cuz no id
-        const game = response.data;
-        console.log(game);
+  useEffect(()=>{
+    getAllGames();
+    getGameListByGenreID();
+  })
+  const getAllGames=()=>{
+    GlobalAPI.getAllGames.then((resp)=>{
+        // console.log(resp.data.results);
+        setallGameList(resp.data.results);
+        setGameListByGenres(resp.data.results);
+    })
+  }
+  const getGameListByGenreID=(id)=>{
+    GlobalAPI.getGameListByGenreID(4).then((res)=>{
+        console.log(res.data.results);
+    })
+  }
 
-        if (new Date(game.released) > releasedDate) {
-          setGameData(game);
-        }
-      } catch (error) {
-        console.error("There has been an error in the fetch. Please resolve.", error);
-        setGameData(null); // Handle error by setting gameData to null
-      }
-    };
-
-    if (id !==null) {
-      fetchData();
-    //   console.log(id);
-    }
-  }, [id, apiKey, releasedDate]);
-//   console.log(id);
-
+  
   return (
-    <div>
-      <Header />
-      {gameData ? (
-        <div>
-          <h1>{gameData.name}</h1>
-          {/* Add other game details you want to display */}
+    <div className="bg-black text-white">
+        <Header/>
+        <div className="grid grid-cols-4 px-8 gap-7">
+            <div className="hidden md:block col-span-1 ">
+                <GenreList/>
+            </div>
+        <div className="col-span-3 md-col-span-3">
+            {allGameList?.length>0&&gameListByGenres.length>0?
+            <div>
+                <Banner gameBanner={allGameList[0]}/>
+                <TrendingGames gameList={allGameList}/>
+                <GamesByGenresId gameList={gameListByGenres}/>
+            </div>:null}
         </div>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
+        </div>
+</div>
   );
 }
+  
