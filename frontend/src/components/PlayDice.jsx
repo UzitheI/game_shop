@@ -44,7 +44,7 @@ const PlayDice=()=>{
     console.log(maxLength);
     const truncatedText =showMore?descript:descript.slice(0,300);
     return(
-        <div className="bg-black text-white bg-full bg-repeat  ">
+        <div className="bg-black text-white bg-full bg-repeat min-vh-100 ">
             <Header/>
             <div className="mt-8">
             <div className="flex justify-around ">
