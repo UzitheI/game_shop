@@ -25,7 +25,7 @@ export default function Right() {
       >
         Last30days
       </Link>
-      <Link
+      {/* <Link
         to="/Top30oftheMonth"
         className="bg-white text-black text-lg mt-4 rounded-lg flex align-middle justify-center w-2/3 ml-10 hover:bg-blue-600 cursor-pointer pop-out "
       >
@@ -36,7 +36,7 @@ export default function Right() {
         className="bg-white text-black text-lg mt-4 rounded-lg flex align-middle justify-center w-2/3 ml-10 hover:bg-blue-600 cursor-pointer pop-out "
       >
         All time
-      </Link>
+      </Link> */}
     </div>
   );
 }
