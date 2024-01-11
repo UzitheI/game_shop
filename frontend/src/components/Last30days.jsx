@@ -13,21 +13,26 @@ export default function Last30days() {
   const [allGameList, setallGameList] = useState(null);
   const [id, setId] = useState(400);
   const [gameListByGenres,setGameListByGenres]=useState([]);
+  const [selectedGenresName,setSelectedGenresName]=useState('Action');
 
   useEffect(()=>{
     getAllGames();
-    getGameListByGenreID();
-  })
+    getGameListByGenresID(4);
+  },[])
   const getAllGames=()=>{
+    console.log('Grenid',id)
     GlobalAPI.getAllGames.then((resp)=>{
         // console.log(resp.data.results);
         setallGameList(resp.data.results);
-        setGameListByGenres(resp.data.results);
+        
+        
     })
   }
-  const getGameListByGenreID=(id)=>{
-    GlobalAPI.getGameListByGenreID(4).then((res)=>{
-        console.log(res.data.results);
+  const getGameListByGenresID=(id)=>{
+    console.log("genreid",id);
+    GlobalAPI.getGameListByGenreID(id).then((resp)=>{
+        console.log(resp.data.results);
+        setGameListByGenres(resp.data.results);
     })
   }
 
@@ -37,14 +42,15 @@ export default function Last30days() {
         <Header/>
         <div className="grid grid-cols-4 px-8 gap-7">
             <div className="hidden md:block col-span-1 ">
-                <GenreList/>
+                <GenreList genereId={(genereId)=>getGameListByGenresID(genereId)}
+                selectedGenresName={(name)=>setSelectedGenresName(name)}/>
             </div>
         <div className="col-span-3 md-col-span-3">
             {allGameList?.length>0&&gameListByGenres.length>0?
             <div>
                 <Banner gameBanner={allGameList[0]}/>
                 <TrendingGames gameList={allGameList}/>
-                <GamesByGenresId gameList={gameListByGenres}/>
+                <GamesByGenresId gameList={gameListByGenres} selectedGenresName={selectedGenresName}/>
             </div>:null}
         </div>
         </div>
