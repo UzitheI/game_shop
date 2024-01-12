@@ -2,16 +2,33 @@ import { useState } from "react"
 import {image} from "../constants/image"
 import {Link} from "react-router-dom";
 import GlobalAPI from "../Services/GlobalAPI";
+import SearchList from "./SearchList";
 
 export default function Header(){
-    const[inputText,setInputText]=useState('');
+    const[input,setInput]=useState('');
     const[isOpen, setIsOpen]=useState(false);
-    const[options,setOptions]=useState([]);
+    const[results,setResults]=useState([]);
 
     const toggleWidth=(width)=>{
         setIsOpen(!isOpen);
     };
 
+    const apiKey="c14a43ddf59e42bba18d3744d8c470cb";
+
+    const fetchData =(value)=>{
+        fetch("https://api.rawg.io/api/games?key="+apiKey)
+        .then((response)=>response.json()).then((json)=>{
+            // console.log(json);
+            const results=json.results.filter((user)=>{
+                return value && user && user.name && user.name.toLowerCase().includes(value)
+            });
+            setResults(results);
+        })
+        }
+    const handleChange =(value)=>{
+        setInput(value)
+        fetchData(value)
+    }
     
     return(
       
@@ -23,11 +40,12 @@ export default function Header(){
             <div className="relative">
                <input type="text" className={`border border-black rounded-lg text-black p-2 w-80 transition-all ${isOpen?"w-96":""}`} 
                placeholder="Search your game.."
-               value={inputText}
+               value={input}
                onClick={toggleWidth}
-               onChange={(e)=>setInputText(e.target.value)} />
-               <option value="text">{}</option>
-               <button className="absolute right-4 top-5 transform -translate-y-1/2 px-4 bg-white text-black rounded-lg" onClick={toggleWidth}>Search</button>
+               onChange={(e)=>handleChange(e.target.value)} />
+               <SearchList results={results}/>
+               
+               
             </div>
             <div className="flex justify-between space-x-4   ">
                 <Link to="/add" className="hover:bg-white hover:text-black rounded-lg mb-14">add</Link>
