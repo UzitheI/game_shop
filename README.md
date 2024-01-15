@@ -15,5 +15,7 @@
 </ul>
 <h1>API</h1>
 <a href="https://rawg.io/">RAWGAPI</a>
-
+<br>
+<h3>Note</h3>
+<p>Currently in halt because the API fetch limit was crossed.</p>
 
