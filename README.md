@@ -13,7 +13,7 @@
 	<li>TAILWIND CSS</li>
 	<li>AXIOS</li>
 </ul>
-<h1>API</h1>
+<h1>api</h1>
 <a href="https://rawg.io/">RAWGAPI</a>
 <br>
 <h3>Note</h3>
